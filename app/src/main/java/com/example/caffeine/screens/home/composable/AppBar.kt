@@ -24,7 +24,6 @@ fun AppBar(
 ) {
     Row(
         modifier = modifier
-            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 24.dp)
             .fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Image(
