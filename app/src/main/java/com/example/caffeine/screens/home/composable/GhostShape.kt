@@ -8,12 +8,15 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.BlurredEdgeTreatment
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.drawscope.Fill
@@ -27,15 +30,13 @@ import com.example.caffeine.ui.theme.shadowColor
 @Composable
 fun GhostShape(
     modifier: Modifier = Modifier
-){
+) {
 
     val infiniteTransition = rememberInfiniteTransition()
 
     val offsetY by infiniteTransition.animateFloat(
-        initialValue = -10f,
-        targetValue = 10f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(2000, easing = LinearEasing),
+        initialValue = -10f, targetValue = 10f, animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 1500, easing = LinearEasing, delayMillis = 10),
             repeatMode = RepeatMode.Reverse
         )
     )
@@ -44,33 +45,37 @@ fun GhostShape(
 
     Box(
         modifier = modifier
-    ){
+    ) {
 
         Box(
             modifier = Modifier
-                .size(160.dp, 20.dp) //TODO handle the shadow of ghost
+                .size(160.dp, 27.dp)
+                .offset(y = (-offsetY * 0.4f).dp + 10.dp)
+                .blur(12.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded)
                 .drawBehind {
                     drawOval(
-                        color = shadowColor.copy(alpha = 0.03f + 0.1f * normalized),
+                        color = shadowColor.copy(alpha = 0.1f + 0.1f * normalized),
                         topLeft = Offset.Zero,
                         size = size,
                         style = Fill
                     )
                 }
-                .align(Alignment.BottomCenter)
-        )
+                .align(Alignment.BottomCenter))
+
 
         Image(
-            painter = painterResource(R.drawable.background),
-            contentDescription = "background image",
-            Modifier.offset(y = offsetY.dp-25.dp).size(244.dp)
+            painter = painterResource(R.drawable.ghost),
+            contentDescription = "Ghost",
+            modifier = Modifier
+                .fillMaxSize()
+                .offset(y = offsetY.dp - 35.dp)
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun Preview(){
+private fun Preview() {
     CaffeineTheme {
         GhostShape()
 

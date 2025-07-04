@@ -60,7 +60,7 @@ fun IntroductionText(
         Spacer(Modifier.height(5.dp))
 
         Row(
-            Modifier.padding(start = 185.dp)
+            Modifier.padding(start = 195.dp)
         ) {
             StarIcon()
 
