@@ -35,7 +35,7 @@ fun GhostShape(
     val infiniteTransition = rememberInfiniteTransition()
 
     val offsetY by infiniteTransition.animateFloat(
-        initialValue = -10f, targetValue = 10f, animationSpec = infiniteRepeatable(
+        initialValue = -20f, targetValue = 15f, animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 1500, easing = LinearEasing, delayMillis = 10),
             repeatMode = RepeatMode.Reverse
         )
