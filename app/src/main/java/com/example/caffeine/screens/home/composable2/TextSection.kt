@@ -38,7 +38,7 @@ fun TextSection(
         )
         Spacer(Modifier.height(4.dp))
         CustomText(
-            text = " What would you like to drink today?",
+            text = "What would you like to drink today?",
             size = 16,
             fontColor = subTitleColor2
         )
@@ -55,11 +55,10 @@ private fun CustomText(
     Text(
         text = text, style = TextStyle(
             fontFamily = FontFamily(
-                Font(R.font.urbanist_regular)
+                Font(R.font.urbanist_bold)
             ),
             fontWeight = FontWeight.W700,
             fontSize = size.sp,
-            lineHeight = 100.sp,
             letterSpacing = 0.25.sp,
         ), color = fontColor, textAlign = TextAlign.Center
     )
