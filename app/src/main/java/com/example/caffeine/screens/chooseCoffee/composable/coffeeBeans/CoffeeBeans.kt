@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.caffeine.R
+import com.example.caffeine.composable.CustomText
 import com.example.caffeine.ui.theme.LightGrayBackground
 import com.example.caffeine.ui.theme.coffeeSizeUnSelectedTxtColor
 
@@ -46,31 +47,47 @@ fun CoffeeBeans(
             modifier = Modifier.padding(top=2.dp),
             horizontalArrangement = Arrangement.spacedBy (45.dp),
         ){
-            CustomText("Low")
-            CustomText("Medium")
-            CustomText("High")
+            CustomText(
+                text = "Low",
+                color = coffeeSizeUnSelectedTxtColor,
+                fontSize = 10.sp,
+                fontWeight = FontWeight.W500,
+                lineHeight = 100.sp,
+                letterSpacing = 0.25.sp,
+                textAlign = TextAlign.Center,
+                fontFamily = FontFamily(
+                    Font(R.font.urbanist_medium)
+                )
+            )
+            CustomText(
+                text = "Medium",
+                color = coffeeSizeUnSelectedTxtColor,
+                fontSize = 10.sp,
+                fontWeight = FontWeight.W500,
+                lineHeight = 100.sp,
+                letterSpacing = 0.25.sp,
+                textAlign = TextAlign.Center,
+                fontFamily = FontFamily(
+                    Font(R.font.urbanist_medium)
+                )
+            )
+            CustomText(
+                text = "High",
+                color = coffeeSizeUnSelectedTxtColor,
+                fontSize = 10.sp,
+                fontWeight = FontWeight.W500,
+                lineHeight = 100.sp,
+                letterSpacing = 0.25.sp,
+                textAlign = TextAlign.Center,
+                fontFamily = FontFamily(
+                    Font(R.font.urbanist_medium)
+                )
+            )
         }
     }
 
-
 }
 
-@Composable
-private fun CustomText(
-    text : String
-){
-    Text(
-        text = text,
-        fontFamily = FontFamily(
-            Font(R.font.urbanist_medium)
-        ),
-        fontWeight = FontWeight.W500,
-        fontSize = 10.sp,
-        textAlign = TextAlign.Center,
-        color = coffeeSizeUnSelectedTxtColor
-    )
-
-}
 
 
 
