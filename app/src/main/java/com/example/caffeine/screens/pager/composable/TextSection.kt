@@ -1,4 +1,4 @@
-package com.example.caffeine.screens.home.composable2
+package com.example.caffeine.screens.pager.composable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

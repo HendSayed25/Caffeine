@@ -1,4 +1,4 @@
-package com.example.caffeine.screens.home
+package com.example.caffeine.screens.pager
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,8 +16,8 @@ import androidx.compose.ui.unit.dp
 import com.example.caffeine.R
 import com.example.caffeine.composable.CustomButton
 import com.example.caffeine.screens.home.composable.AppBar
-import com.example.caffeine.screens.home.composable2.HomePager
-import com.example.caffeine.screens.home.composable2.TextSection
+import com.example.caffeine.screens.pager.composable.HomePager
+import com.example.caffeine.screens.pager.composable.TextSection
 import com.example.caffeine.ui.theme.CaffeineTheme
 import com.example.caffeine.ui.theme.white
 
@@ -31,7 +31,9 @@ fun HomeScreenContent2(){
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Column{
+        Column(
+            modifier = Modifier.weight(1f)
+        ){
             AppBar(
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp,bottom =16.dp, top = 16.dp )
             )
@@ -40,9 +42,10 @@ fun HomeScreenContent2(){
                 modifier = Modifier.padding(start = 16.dp)
             )
 
-            Spacer(Modifier.height(65.dp))
+            Spacer(Modifier.height(90.dp))
 
             HomePager()
+
         }
 
         Box(
