@@ -9,10 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.caffeine.R
 import com.example.caffeine.composable.CustomButton
 import com.example.caffeine.screens.home.composable.AppBar
@@ -21,8 +24,23 @@ import com.example.caffeine.screens.pager.composable.TextSection
 import com.example.caffeine.ui.theme.CaffeineTheme
 import com.example.caffeine.ui.theme.white
 
+
 @Composable
-fun HomeScreenContent2(){
+fun PagerScreen(
+    navController : NavController
+){
+    PagerScreenContent(
+        onClickNext = { coffeeName ->
+            navController.navigate("chooseCoffeeScreen/$coffeeName")}
+    )
+}
+
+@Composable
+private fun PagerScreenContent(
+    onClickNext : (String)-> Unit,
+){
+    val selectedCoffee = remember { mutableStateOf("") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -44,7 +62,11 @@ fun HomeScreenContent2(){
 
             Spacer(Modifier.height(90.dp))
 
-            HomePager()
+            HomePager(
+                onCoffeeSelected = { coffeeName ->
+                    selectedCoffee.value = coffeeName
+                }
+            )
 
         }
 
@@ -54,7 +76,7 @@ fun HomeScreenContent2(){
             CustomButton(
                 text = "Continue",
                 iconId = R.drawable.arrow_right,
-                onClick = {} // args from navigation
+                onClick = {onClickNext(selectedCoffee.value)}
             )
         }
     }
@@ -66,8 +88,8 @@ fun HomeScreenContent2(){
 @Composable
 private fun Preview(){
     CaffeineTheme {
-        HomeScreenContent2(
-
+        PagerScreenContent(
+            onClickNext = {}
         )
 
     }

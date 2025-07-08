@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.caffeine.R
 import com.example.caffeine.composable.CustomButton
 import com.example.caffeine.screens.home.composable.AppBar
@@ -20,11 +21,20 @@ import com.example.caffeine.screens.home.composable.IntroductionText
 import com.example.caffeine.ui.theme.CaffeineTheme
 import com.example.caffeine.ui.theme.white
 
+
 @Composable
 fun HomeScreen(
-    buttonText : String,
-    iconId : Int ,
-    onClick : ()-> Unit
+    navController : NavController
+) {
+    HomeScreenContent (
+        onClickNext = {navController.navigate("pagerScreen")}
+    )
+}
+
+@Composable
+private fun HomeScreenContent(
+    onClickNext : ()-> Unit,
+
 ){
     Column(
         modifier = Modifier
@@ -54,9 +64,9 @@ fun HomeScreen(
          ){
              CustomButton(
                  modifier = Modifier.align(Alignment.Center),
-                 text = buttonText,
-                 iconId = iconId,
-                 onClick = onClick
+                 text = "bring my coffee",
+                 iconId = R.drawable.coffee_icon,
+                 onClick = onClickNext
              )
          }
     }
@@ -66,11 +76,8 @@ fun HomeScreen(
 @Composable
 private fun Preview(){
     CaffeineTheme {
-        HomeScreen(
-            buttonText = "bring my coffee",
-            iconId = R.drawable.coffee_icon,
-            onClick = {}
-        )
-
+      HomeScreenContent(
+          onClickNext = {}
+      )
     }
 }

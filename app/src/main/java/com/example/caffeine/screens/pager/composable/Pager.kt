@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -22,24 +23,29 @@ import kotlin.math.absoluteValue
 
 @Composable
 fun HomePager(
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+    onCoffeeSelected: (String) -> Unit
+) {
 
-    val images = listOf(
-        R.drawable.espresso,
-        R.drawable.macchiato,
-        R.drawable.latte,
-        R.drawable.black
+    val coffees = listOf(
+        "Espresso" to R.drawable.espresso,
+        "Macchiato" to R.drawable.macchiato,
+        "Latte" to R.drawable.latte,
+        "Black" to R.drawable.black
     )
 
-    val pagerState  = rememberPagerState (pageCount = {images.size})
+    val pagerState = rememberPagerState(pageCount = { coffees.size })
+
+    LaunchedEffect(pagerState.currentPage) {
+        onCoffeeSelected(coffees[pagerState.currentPage].first)
+    }
 
     HorizontalPager(
         state = pagerState,
         modifier = modifier,
         contentPadding = PaddingValues(horizontal = 80.dp),
         pageSpacing = (-15).dp
-    ) { page->
+    ) { page ->
         val pageOffset = (
                 (pagerState.currentPage - page) + pagerState
                     .currentPageOffsetFraction
@@ -48,20 +54,20 @@ fun HomePager(
         val easedFraction = LinearEasing.transform(1f - pageOffset.coerceIn(0f, 1f))
 
         val scale by animateFloatAsState(
-             lerp (start = 0.6f, stop =  1f, fraction = easedFraction)
+            lerp(start = 0.6f, stop = 1f, fraction = easedFraction)
 
         )
 
 
-        Box (
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .scale(scale)
-                .offset(y=(-25).dp)
+                .offset(y = (-25).dp)
 
-        ){
+        ) {
             Image(
-                painter = painterResource(images[page]),
+                painter = painterResource(coffees[page].second),
                 contentDescription = "pager item",
             )
         }
@@ -70,6 +76,8 @@ fun HomePager(
 
 @Preview
 @Composable
-private fun Preview(){
-    HomePager()
+private fun Preview() {
+    HomePager(
+        onCoffeeSelected = {}
+    )
 }

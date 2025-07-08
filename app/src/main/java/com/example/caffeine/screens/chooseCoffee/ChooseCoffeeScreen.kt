@@ -1,5 +1,8 @@
 package com.example.caffeine.screens.chooseCoffee
 
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -19,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.caffeine.R
 import com.example.caffeine.composable.CustomButton
 import com.example.caffeine.screens.chooseCoffee.composable.AppBar
@@ -27,11 +32,30 @@ import com.example.caffeine.screens.chooseCoffee.composable.CoffeeCupItem
 import com.example.caffeine.screens.chooseCoffee.composable.CoffeeSize
 import com.example.caffeine.ui.theme.white
 
+
+
 @Composable
-fun ChooseCoffeeScreen(){
+fun ChooseCoffeeScreen(
+    navController : NavController,
+    coffeeName : String
+){
+    ChooseCoffeeScreenContent(
+        onClickNext = { coffeeCupSize ->
+            navController.navigate("prepareCoffeeScreen/$coffeeCupSize")
+        },
+        onClickBack = { navController.navigateUp() },
+        coffeeName = coffeeName
+    )
+}
+@Composable
+private fun ChooseCoffeeScreenContent(
+    onClickNext : (Int) -> Unit,
+    onClickBack : () -> Unit,
+    coffeeName : String
+){
 
     var selectedSize by remember { mutableStateOf("M") }
-    var selectedCoffeeIndex by remember { mutableIntStateOf(1) }
+    var selectedCoffeeIndex by remember { mutableIntStateOf(-1) }
 
     val coffeeCupSize = when (selectedSize) {
         "S" -> 150
@@ -49,22 +73,25 @@ fun ChooseCoffeeScreen(){
         verticalArrangement = Arrangement.SpaceBetween
     ) {
 
+        val isFalling = selectedCoffeeIndex != -1
+
         Column (
             horizontalAlignment = Alignment.CenterHorizontally,
 
             ){
             AppBar(
                 modifier = Modifier.padding(16.dp),
-                title = "Macchiato" //will given by args
+                title = coffeeName, 
+                onClickBack = onClickBack
             )
 
             CoffeeCupItem(
-                modifier = Modifier.size(360.dp, 341.dp),
+                modifier = Modifier.size(360.dp, 341.dp).padding(top=25.dp),
                 coffeeCupSize = coffeeCupSize,
             )
 
             CoffeeSize(
-                modifier = Modifier.padding(top = 10.dp),
+                modifier = Modifier.padding(top = 20.dp),
                 selectedSize = selectedSize,
                 onSizeSelected = { selectedSize = it }
             )
@@ -83,7 +110,7 @@ fun ChooseCoffeeScreen(){
                CustomButton(
                    text = "Continue",
                    iconId = R.drawable.arrow_right,
-                   onClick = {} // args from navigation
+                   onClick = {onClickNext(coffeeCupSize)}
                )
            }
 
@@ -94,6 +121,9 @@ fun ChooseCoffeeScreen(){
 @Preview
 @Composable
 private fun Preview(){
-    ChooseCoffeeScreen()
-
+    ChooseCoffeeScreenContent(
+        onClickNext = {},
+        onClickBack = {},
+        coffeeName = "Macchiato"
+    )
 }
