@@ -25,6 +25,9 @@ val subTitleColor2 = Color(0xCC1F1F1F)
 val coffeeSizeSelectedTxtColor = Color(0xDEFFFFFF)
 val coffeeSizeUnSelectedTxtColor = Color(0x991F1F1F)
 val coffeeSizeShadow = Color(0x80B94B23)
+val switchOnColor = Color(0xFFFFEEE7)
+val colonColor = Color(0x1F1F1F1F)
+val switchOnTextColor = Color(0x99FFFFFF)
 
 
 
