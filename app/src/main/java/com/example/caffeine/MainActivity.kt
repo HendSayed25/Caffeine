@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.caffeine.screens.chooseCoffee.ChooseCoffeeScreen
 import com.example.caffeine.screens.chooseSnack.ChooseSnackScreen
+import com.example.caffeine.screens.finalOrder.FinalOrderScreen
 import com.example.caffeine.screens.home.HomeScreen
 import com.example.caffeine.screens.pager.PagerScreen
 import com.example.caffeine.screens.prepareCoffee.PrepareCoffeeScreen
@@ -51,6 +52,8 @@ class MainActivity : ComponentActivity() {
                              ) }
 
                              composable("chooseSnackScreen"){ ChooseSnackScreen(navController = navController) }
+
+                             composable ("finalOrder") { FinalOrderScreen(navController=navController) }
                          }
                 }
             }

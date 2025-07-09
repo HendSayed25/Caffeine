@@ -3,33 +3,31 @@ package com.example.caffeine.screens.finalOrder
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.caffeine.R
 import com.example.caffeine.composable.AppBar
 import com.example.caffeine.composable.CustomButton
-import com.example.caffeine.composable.CustomText
 import com.example.caffeine.screens.finalOrder.composable.GoodByeMessage
 import com.example.caffeine.screens.finalOrder.composable.WelcomeMessage
-import com.example.caffeine.ui.theme.subTitleColor2
 import com.example.caffeine.ui.theme.white
 
 @Composable
-fun FinalOrderScreen(){
-
-
+fun FinalOrderScreen(
+    navController: NavController
+){
+    FinalOrderContent (
+        onClickBack = {navController.navigateUp()}
+    )
 }
 
 @Composable
@@ -38,7 +36,7 @@ private fun FinalOrderContent(
     onClickBack : () -> Unit
 ){
     Column (
-        modifier = modifier.background(white).fillMaxSize(),
+        modifier = modifier.background(white).fillMaxSize().padding(top=30.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         AppBar(
@@ -50,6 +48,8 @@ private fun FinalOrderContent(
             modifier = Modifier.padding(top=24.dp, bottom = 24.dp, start = 8.dp, end = 8.dp),
             text = "More Espresso, Less Depresso"
         )
+
+        Spacer(Modifier.height(20.dp))
 
         Image(
             painter = painterResource(R.drawable.cupcake), //will changed by args

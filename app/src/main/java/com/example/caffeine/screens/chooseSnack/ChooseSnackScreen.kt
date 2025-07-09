@@ -19,6 +19,7 @@ import androidx.navigation.NavController
 import com.example.caffeine.R
 import com.example.caffeine.composable.AppBar
 import com.example.caffeine.composable.CustomText
+import com.example.caffeine.screens.chooseSnack.composable.CustomVerticalPager
 import com.example.caffeine.ui.theme.fontColor
 import com.example.caffeine.ui.theme.white
 
@@ -28,7 +29,7 @@ fun ChooseSnackScreen(
     navController : NavController
 ){
     ChooseSnackScreenContent(
-        onNextClick = {navController.navigate("")},
+        onNextClick = {navController.navigate("finalOrder")},
         onClickBack = {navController.navigateUp()}
 
     )
@@ -66,6 +67,9 @@ fun ChooseSnackScreenContent(
             )
         }
 
+        CustomVerticalPager(
+            onClickNext = onNextClick
+        )
 
     }
 }
