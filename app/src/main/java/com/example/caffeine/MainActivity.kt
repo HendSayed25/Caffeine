@@ -16,7 +16,7 @@ import com.example.caffeine.screens.chooseCoffee.ChooseCoffeeScreen
 import com.example.caffeine.screens.chooseSnack.ChooseSnackScreen
 import com.example.caffeine.screens.home.HomeScreen
 import com.example.caffeine.screens.pager.PagerScreen
-import com.example.caffeine.screens.prepareCoffee.composable.PrepareCoffeeScreen
+import com.example.caffeine.screens.prepareCoffee.PrepareCoffeeScreen
 import com.example.caffeine.ui.theme.CaffeineTheme
 
 class MainActivity : ComponentActivity() {
