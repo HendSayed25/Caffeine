@@ -18,9 +18,9 @@ fun CustomVerticalPager(
     onClickNext : () -> Unit
 ) {
     val snacks = listOf(
+        R.drawable.cupcake_card,
         R.drawable.chocklate_card,
         R.drawable.crosso_card,
-        R.drawable.cupcake_card,
         R.drawable.cinabon_catd,
         R.drawable.oreo_card,
     )

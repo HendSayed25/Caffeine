@@ -32,7 +32,7 @@ fun AppBar(
             modifier = Modifier
                 .size(48.dp)
                 .clickable{
-                    onClickBack
+                    onClickBack()
                 }
                 .background(
                     LightGrayBackground, shape = RoundedCornerShape(100.dp)
