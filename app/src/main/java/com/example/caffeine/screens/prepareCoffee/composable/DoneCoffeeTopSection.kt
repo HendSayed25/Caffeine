@@ -1,7 +1,6 @@
 package com.example.caffeine.screens.prepareCoffee.composable
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
@@ -16,20 +15,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.caffeine.R
 import com.example.caffeine.composable.CustomText
-import com.example.caffeine.ui.theme.coffeeSizeColor
-import com.example.caffeine.ui.theme.coffeeSizeUnSelectedTxtColor
 import com.example.caffeine.ui.theme.fontColor
 
+
 @Composable
-fun TextSection(
+fun DoneCoffeeTopSection(
     modifier: Modifier = Modifier
-) {
+){
+
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
+
     ) {
+        CorrectSign()
+        Spacer(Modifier.height(24.dp))
         CustomText(
-            text = "Almost Done",
+            text = "Your coffee is ready,",
             color = fontColor,
             fontSize = 22.sp,
             fontWeight = FontWeight.W700,
@@ -40,11 +42,10 @@ fun TextSection(
                 Font(R.font.urbanist_bold)
             )
         )
-        Spacer(Modifier.height(8.dp))
         CustomText(
-            text = "Your coffee will be finish in",
-            color = coffeeSizeUnSelectedTxtColor,
-            fontSize = 16.sp,
+            text = "Enjoy",
+            color = fontColor,
+            fontSize = 22.sp,
             fontWeight = FontWeight.W700,
             lineHeight = 100.sp,
             letterSpacing = 0.25.sp,
@@ -53,48 +54,11 @@ fun TextSection(
                 Font(R.font.urbanist_bold)
             )
         )
-        Spacer(Modifier.height(12.dp))
-
-        Row {
-            CustomText(
-                text = "CO",
-                color = coffeeSizeColor,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.W800,
-                textAlign = TextAlign.Center,
-                fontFamily = FontFamily(
-                    Font(R.font.sniglet_extra_bold)
-                )
-            )
-            ColonItem()
-            CustomText(
-                text = "FF",
-                color = coffeeSizeColor,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.W800,
-                textAlign = TextAlign.Center,
-                fontFamily = FontFamily(
-                    Font(R.font.sniglet_extra_bold)
-                )
-            )
-            ColonItem()
-            CustomText(
-                text = "EE",
-                color = coffeeSizeColor,
-                fontSize = 32.sp,
-                fontWeight = FontWeight.W800,
-                textAlign = TextAlign.Center,
-                fontFamily = FontFamily(
-                    Font(R.font.sniglet_extra_bold)
-                )
-            )
-        }
-
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun Preview() {
-    TextSection()
+private fun Preview(){
+    DoneCoffeeTopSection()
 }
