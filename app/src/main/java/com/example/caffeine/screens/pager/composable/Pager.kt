@@ -58,7 +58,6 @@ fun HomePager(
 
         )
 
-
         Box(
             modifier = Modifier
                 .fillMaxSize()

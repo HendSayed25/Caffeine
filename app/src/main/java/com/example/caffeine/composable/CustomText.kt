@@ -8,16 +8,17 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun CustomText(
     text: String,
-    color: Color ,
+    color: Color,
     fontSize: TextUnit,
-    fontWeight: FontWeight ,
-    lineHeight: TextUnit ,
-    letterSpacing: TextUnit ,
-    textAlign: TextAlign ,
+    fontWeight: FontWeight,
+    lineHeight: TextUnit = 100.sp,
+    letterSpacing: TextUnit = 0.25.sp,
+    textAlign: TextAlign = TextAlign.Center,
     fontFamily: FontFamily
 ) {
     Text(
