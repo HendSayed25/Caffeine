@@ -28,6 +28,9 @@ val coffeeSizeShadow = Color(0x80B94B23)
 val switchOnColor = Color(0xFFFFEEE7)
 val colonColor = Color(0x1F1F1F1F)
 val switchOnTextColor = Color(0x99FFFFFF)
+val takeAwayColor = Color(0xB21F1F1F)
+val wavyLineColor = Color(0xCC000000)
+
 
 
 
