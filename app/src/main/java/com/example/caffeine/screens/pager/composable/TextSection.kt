@@ -37,7 +37,7 @@ fun TextSection(
             ),
         )
         CustomText(
-            text = "Hamsa ☀",
+            text = "Hend ☀",
             color = subTitleColor,
             fontSize = 32.sp,
             fontWeight = FontWeight.W700,
