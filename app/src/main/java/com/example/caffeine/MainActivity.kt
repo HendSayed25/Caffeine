@@ -53,7 +53,12 @@ class MainActivity : ComponentActivity() {
 
                              composable("chooseSnackScreen"){ ChooseSnackScreen(navController = navController) }
 
-                             composable ("finalOrder") { FinalOrderScreen(navController=navController) }
+                             composable ("finalOrder/{index}", arguments = listOf(
+                                 navArgument("index"){type = NavType.IntType}
+                             )) { backStackEntry ->
+                                 val indexOfImage = backStackEntry.arguments?.getInt("index")?:0
+                                 FinalOrderScreen(navController = navController, imageIndex = indexOfImage)
+                             }
                          }
                 }
             }
