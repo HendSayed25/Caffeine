@@ -1,5 +1,6 @@
 package com.example.caffeine.screens.finalOrder
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -23,18 +24,30 @@ import com.example.caffeine.ui.theme.white
 
 @Composable
 fun FinalOrderScreen(
-    navController: NavController
+    navController: NavController,
+    imageIndex : Int
 ){
     FinalOrderContent (
-        onClickBack = {navController.navigateUp()}
+        onClickBack = {navController.navigateUp()},
+        imageIndex = imageIndex
     )
 }
 
 @Composable
 private fun FinalOrderContent(
     modifier : Modifier = Modifier,
-    onClickBack : () -> Unit
+    onClickBack : () -> Unit,
+    imageIndex: Int
 ){
+
+    val imageId = when(imageIndex){
+        0 -> R.drawable.cupcake
+        1 -> R.drawable.chocklate
+        2 ->  R.drawable.corosso
+        3 ->  R.drawable.cinabon
+        else -> R.drawable.oreo
+    }
+
     Column (
         modifier = modifier.background(white).fillMaxSize().padding(top=30.dp),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -52,10 +65,12 @@ private fun FinalOrderContent(
         Spacer(Modifier.height(20.dp))
 
         Image(
-            painter = painterResource(R.drawable.cupcake), //will changed by args
+            painter = painterResource(imageId),
             contentDescription = "snack icon that user choose",
             modifier = Modifier.padding(horizontal = 30.dp).weight(1f)
         )
+
+        Log.e("Inddexxxxxxxxxxxxxx","Indexxx $imageIndex")
 
         GoodByeMessage(
             text = "Bon appétit",
@@ -77,6 +92,7 @@ private fun FinalOrderContent(
 @Composable
 private fun Preview(){
     FinalOrderContent(
-        onClickBack = {}
+        onClickBack = {},
+        imageIndex = 0
     )
 }
