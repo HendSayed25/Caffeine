@@ -6,10 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -30,6 +27,7 @@ import com.example.caffeine.composable.CustomButton
 import com.example.caffeine.screens.chooseCoffee.composable.CoffeeCupItem
 import com.example.caffeine.screens.prepareCoffee.composable.TakeAwaySection
 import com.example.caffeine.screens.prepareCoffee.composable.TextSection
+import com.example.caffeine.screens.prepareCoffee.composable.TopSection
 import com.example.caffeine.ui.theme.white
 
 
@@ -70,79 +68,83 @@ private fun PrepareCoffeeScreenContent(
 
     LaunchedEffect(Unit) {
 
-            offsetYTopSection.snapTo(-screenHeightPx)
-            offsetYTopSection.animateTo(
-                targetValue = 100f,
-                animationSpec = tween(800, delayMillis = 4000)
-            )
+        offsetYTopSection.snapTo(-screenHeightPx)
+        offsetYTopSection.animateTo(
+            targetValue = 53f,
+            animationSpec = tween(800, delayMillis = 4000)
+        )
 
-            offsetYCup.snapTo(0f)
-            offsetYCup.animateTo(
-                targetValue = 220f,
-                animationSpec = tween(700)
-            )
+        offsetYCup.snapTo(0f)
+        offsetYCup.animateTo(
+            targetValue = 260f,
+            animationSpec = tween(700)
+        )
 
     }
 
-
-    Column(
-        modifier = modifier.background(white).fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+    Box(
+        modifier = modifier
+            .background(white)
+            .fillMaxSize()
     ) {
-
-//        if (startAnimation) {
-//            TopSection(
-//                modifier = Modifier.offset(y = offsetYTopSection.value.dp),
-//                onClickBack = onClickBack,
-//                widthOfCup = widthOfCup
-//            )
-//        }
-
 
         CoffeeCupItem(
             coffeeCupSize = coffeeCupSize,
-            modifier = Modifier.padding(top = 80.dp ).offset(y = offsetYCup.value.dp)
+            modifier = Modifier
+                .padding(top = if(startAnimation)0.dp else 80.dp)
+                .offset(y = offsetYCup.value.dp)
+                .align(Alignment.TopCenter)
         )
 
-        Spacer(Modifier.weight(1f))
 
+        if (startAnimation) {
+            TopSection(
+                modifier = Modifier
+                    .offset(y = offsetYTopSection.value.dp)
+                    .align(Alignment.TopCenter),
+                onClickBack = onClickBack,
+                widthOfCup = widthOfCup
+            )
+        }
+        
 
-        if(!startAnimation) {
-            Box(
-                Modifier
-                    .height(50.dp)
-                    .fillMaxWidth()
+        if (!startAnimation) {
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 64.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 WavyLine(
                     onFinished = { startAnimation = true }
                 )
+
+                TextSection(modifier=modifier.padding(top=37.dp))
             }
-        }
-
-
-        if (!startAnimation) {
-            TextSection(
-                modifier = Modifier.padding(bottom = 64.dp)
-            )
         } else {
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(bottom = 50.dp,top=16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                TakeAwaySection(
+                    modifier = Modifier,
+                    isChecked = isChecked,
+                    onCheckedChange = { isChecked = it }
+                )
 
-            TakeAwaySection(
-                modifier = Modifier,
-                isChecked = isChecked,
-                onCheckedChange = { isChecked = it }
-            )
-
-            CustomButton(
-                modifier = Modifier.padding(bottom = 50.dp, top = 16.dp),
-                text = "Take snack",
-                iconId = R.drawable.arrow_right,
-                onClick = onClickNext
-            )
+                CustomButton(
+                    modifier = Modifier.padding(top = 16.dp),
+                    text = "Take snack",
+                    iconId = R.drawable.arrow_right,
+                    onClick = onClickNext
+                )
+            }
         }
     }
 
 }
-
 @Preview(showBackground = true)
 @Composable
 private fun Preview(){
