@@ -29,14 +29,16 @@ fun ChooseSnackScreen(
     navController : NavController
 ){
     ChooseSnackScreenContent(
-        onNextClick = {navController.navigate("finalOrder")},
+        onNextClick = { index->
+            navController.navigate("finalOrder/$index")
+          },
         onClickBack = {navController.navigateUp()}
 
     )
 }
 @Composable
 fun ChooseSnackScreenContent(
-    onNextClick : () -> Unit,
+    onNextClick : (Int) -> Unit,
     onClickBack : () -> Unit
 ){
     Column (
